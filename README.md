@@ -116,3 +116,60 @@ try {
   throw err
 }
 ```
+
+
+## API Reference
+
+### `createBinauth`
+
+Main Export of `@exodus/binauth`.
+
+This function creates the methods used to create & verify challenges and authentication tokens according to a given public/private key pair.
+
+Parameters:
+- `options`: `Object` (required)
+  - `serverPublicKey`: `Buffer` (required) - The ED25519 public key of the server.
+  - `serverPrivateKey`: `Buffer` (required) - The ED25519 private key of the server.
+
+Returns:
+- `binauth`: `Object`
+  - `getChallenge`: `Function`
+  - `getToken`: `Function`
+  - `verifyToken`: `Function`
+
+----------------------
+
+### `getChallenge`
+
+Creates a challenge on the given public key using the
+
+**Parameters**:
+- `publicKey`: `Buffer` (required) - The 32-byte ED25519 public key to which the challenge will be issued.
+
+**Returns**:
+- `Promise<Buffer>` - The challenge which must be signed by the client's private key.
+
+----------------------
+
+### `getToken`
+
+Tests a signed challenge. Issues an authentication token if the signed challenge correctly proves control of the key pair.
+
+**Parameters**:
+- `publicKey`: `Buffer` (required) - The 32-byte ED25519 public key to which the challenge was issued.
+- `signedChallenge`: `Buffer` (required) - The challenge from `binauth.getChallenge`, after having signed it with the client's private key.
+
+**Returns**:
+- `Promise<Buffer>` - The authentication token which will allow the holder to authenticate, via `binauth.verifyToken`, as the given `publicKey` until it expires, or until the server's key pair is changed.
+
+----------------------
+
+### `verifyToken`
+
+Tests an authentication token. If valid, returns the public key over which the holder of the token has proven control.
+
+**Parameters**:
+- `token`: `Buffer` (required) - The authentication token from `binauth.getToken`.
+
+**Returns**:
+- `Promise<Buffer>` - The public key which the holder of the authentication token has control.
