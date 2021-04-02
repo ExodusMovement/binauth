@@ -1,0 +1,41 @@
+{
+  "name": "@exodus/binauth",
+  "version": "0.1.0",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "description": "Stateless public-key based server-client authentication system",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "lint": "jshint lib",
+    "test": "node binauth.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ExodusMovement/binauth.git"
+  },
+  "keywords": [
+    "public",
+    "private",
+    "key",
+    "stateless",
+    "auth",
+    "authentication"
+  ],
+  "author": "Exodus Movement Inc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ExodusMovement/binauth/issues"
+  },
+  "homepage": "https://github.com/ExodusMovement/binauth#readme",
+  "devDependencies": {
+    "jshint": "2.12.0",
+    "tape": "5.2.2"
+  },
+  "dependencies": {
+    "@exodus/sodium-crypto": "^3.1.0"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "esversion": 8,
+  "eqeqeq": true,
+  "latedef": true,
+  "strict": "implied",
+  "undef": true,
+  "unused": true,
+  "varstmt": true,
+  "eqnull": true,
+  "asi": true,
+  "node": true
+}
