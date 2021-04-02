@@ -47,7 +47,7 @@ const { publicKey, privateKey } = await sodium.genSignKeyPair(entropy)
 
 ```js
 // Server
-const challenge = await binauth.getChallenge({ publicKey })
+const challenge = await binauth.getChallenge(publicKey)
 console.log(challenge.toString('base64')) // 'AcwBvnPeBHTRw...'
 ```
 
@@ -79,10 +79,7 @@ If validation fails, an error is thrown which may have a `.statusCode` property.
 ```js
 // Server
 try {
-  const authToken = await binauth.getToken({
-    publicKey: publicKeyHex,
-    signedChallenge: signedChallengeB64,
-  })
+  const authToken = await binauth.getToken(publicKey, signedChallenge)
   console.log(authToken.toString('base64')) // 'UntZvh3hKSPtY3...'
 } catch (err) {
   // BadRequest - client is trying to manipulate the server, forge signatures, etc

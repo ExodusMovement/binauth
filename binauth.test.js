@@ -20,9 +20,7 @@ test('binauth service', (t) => {
   t.test('issues challenges and tokens', async (t) => {
     const keyPair = await genKeyPair()
 
-    const challenge = await binauth.getChallenge({
-      publicKey: keyPair.publicKey,
-    })
+    const challenge = await binauth.getChallenge(keyPair.publicKey)
 
     t.true(Buffer.isBuffer(challenge), 'returns challenge buffer')
 
@@ -42,10 +40,7 @@ test('binauth service', (t) => {
       privateKey: keyPair.privateKey,
     })
 
-    const token = await binauth.getToken({
-      signedChallenge: signedChallenge,
-      publicKey: keyPair.publicKey,
-    })
+    const token = await binauth.getToken(keyPair.publicKey, signedChallenge)
 
     t.true(Buffer.isBuffer(token), 'returns auth token buffer')
 
@@ -72,7 +67,7 @@ test('binauth service', (t) => {
     )
     const publicKey = Buffer.from('18a5b8403234f08fe0364198fb4475d138cce03717a428500e78be2b8fbe4a63', 'hex')
 
-    const token = await binauth.getToken({ publicKey, signedChallenge })
+    const token = await binauth.getToken(publicKey, signedChallenge)
     t.equal(
       token.toString('base64'),
       'BabWhb2/N3yMBFeKFTr020lQMTIxnXyNakLO2yXgTIW92vzJLrcDdtb9Uinr80LRUEtrhLzq5eOLOeuAmPSqAQIYpbhAMjTwj+A2QZj7RHXROMzgNxekKFAOeL4rj75KY1/1D7o=',
@@ -154,7 +149,7 @@ test('binauth service', (t) => {
       const signedChallenge = Buffer.from(fixture.signedChallenge, 'base64')
       const publicKey = Buffer.from(fixture.publicKey, 'hex')
       try {
-        await binauth.getToken({ signedChallenge, publicKey })
+        await binauth.getToken(publicKey, signedChallenge)
         t.fail(`expected to throw error: ${fixture.error}`)
       } catch (err) {
         t.match(err.message, new RegExp(fixture.error, 'i'), `expected getToken error: ${fixture.error}`)
@@ -199,9 +194,8 @@ test('binauth service', (t) => {
         // Type:       1 (challenge)
         // Public Key: 4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc
         // Time:       2021-01-06T01:17:46.000Z
-        token: await binauth.getChallenge({
-          publicKey: Buffer.from('4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc', 'hex'),
-        }).then((challenge) => challenge.toString('base64')),
+        token: await binauth.getChallenge(Buffer.from('4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc', 'hex'))
+          .then((challenge) => challenge.toString('base64')),
         // 'emmedfnflNfNpO+CpZg9znC2xb0b+KLPAFvflirEVjryAvnBOToErx7wmkByTZV9VmDQIrMd+ywHAIWSE/j7AQFPvJnp+POy49++/xPXOFbSTqFC1mTlXaQ0o9BS6/nYvF/1D7o=',
         error: 'incorrect bintoken type',
       },
@@ -265,29 +259,24 @@ test('binauth service', (t) => {
 
   t.test('rejects invalid input types', async (t) => {
     try {
-      await binauth.getChallenge({
-        publicKey: '4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc',
-      })
+      await binauth.getChallenge('4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc')
       t.fail('expected to throw invalid public key')
     } catch (err) {
       t.match(err.message, /invalid public key/, 'expected to fail invalid public key input type')
     }
 
     try {
-      await binauth.getChallenge({
-        publicKey: Buffer.alloc(10),
-      })
+      await binauth.getChallenge(Buffer.alloc(10))
       t.fail('expected to throw invalid public key')
     } catch (err) {
       t.match(err.message, /invalid public key/, 'expected to fail invalid public key input length')
     }
 
     try {
-      await binauth.getToken({
-        signedChallenge:
-          'hSAlAeN/YagQTHuMxT8hj1qBZ9QVv1WMbTQx3+E1Lcw/8ntb+V5vowEeDy3PaS4hlPSfwfXS/cqFg+64zw3LB+4wq67HVFutLWEj8rW543ujmiZGNyMgf2aXVVCWy1t8xnJn1F0buvXXliN1y8cYk0FfyraZ8jfZclL3JfWqLQEBAF/1D7o=',
-        publicKey: Buffer.from('4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc', 'hex'),
-      })
+      await binauth.getToken(
+        Buffer.from('4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc', 'hex'),
+        'hSAlAeN/YagQTHuMxT8hj1qBZ9QVv1WMbTQx3+E1Lcw/8ntb+V5vowEeDy3PaS4hlPSfwfXS/cqFg+64zw3LB+4wq67HVFutLWEj8rW543ujmiZGNyMgf2aXVVCWy1t8xnJn1F0buvXXliN1y8cYk0FfyraZ8jfZclL3JfWqLQEBAF/1D7o='
+      )
       t.fail('expected to throw invalid signedChallenge')
     } catch (err) {
       t.match(err.message, /invalid signed challenge/, 'expected to fail invalid signed challenge input type')
