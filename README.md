@@ -41,7 +41,7 @@ const entropy = Buffer.from('995007b62f7b2519b1ff34337470db9e323e32ec7118fbe2835
 const { publicKey, privateKey } = await sodium.genSignKeyPair(entropy)
 ```
 
-3. The client sends its public key, to the server.
+3. The client sends its public key to the server.
 
 4. The server issues a challenge on the client's public key. A challenge is a byte array, composed of a version byte specifying that it is a challenge, the client's public key, and a timestamp. The challenge is then signed by the server's private key, so that the server can later verify the challenge is authentic, thereby allowing for statelessness. All this is encapsulated within `binauth.getChallenge`, which returns the signed challenge.
 
