@@ -187,6 +187,47 @@ test('binauth service', (t) => {
     }
   })
 
+  t.test('challengeTTL is customizable', async (t) => {
+    const binauth = createBinauth({ serverPublicKey, serverPrivateKey, challengeTTL: 1 })
+
+    // Type:       1 (challenge)
+    // Public Key: 18a5b8403234f08fe0364198fb4475d138cce03717a428500e78be2b8fbe4a63
+    // Time:       2021-01-06T01:17:46.000Z
+    const signedChallenge = Buffer.from(
+      'rVvDDaX9NRVqCuxBOToWjujJbMS2b0He1caovgrFZVx7wbtroXoVnPCw0Xitbys/OsA7v1EuboEHU346c3/QAhwVOBzWGJJguGQQ3SDyvobhqMUBH+PCq8B+XANJFrkQvRlw/gEm/ep+4+/LiiqCkOLgg6y6D9uGm0gXTw5SfAkBGKW4QDI08I/gNkGY+0R10TjM4DcXpChQDni+K4++SmNf9Q+6',
+      'base64'
+    )
+    const publicKey = Buffer.from('18a5b8403234f08fe0364198fb4475d138cce03717a428500e78be2b8fbe4a63', 'hex')
+
+    try {
+      await binauth.getToken(publicKey, signedChallenge)
+      t.fail('expected challenge to be expired')
+    } catch (err) {
+      t.equal(err.statusCode, 401, 'unauthorized due to challenge expiry')
+      t.match(err.message, /challenge expired/, '"auth token expired" error message')
+    }
+  })
+
+  t.test('tokenTTL is customizable', async (t) => {
+    const binauth = createBinauth({ serverPublicKey, serverPrivateKey, tokenTTL: 10000 })
+
+    // Type:       2 (token)
+    // Public Key: 4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc
+    // Time:       2021-01-05T22:17:46.000Z
+    const token = Buffer.from(
+      '4UkbxKggoctAvU8IJqxvDuVmFxbTSbPBcEq2RuxdV21tlaMLVgRPU5i5rRyi0/48oc3dOzJbV8nnfLcCRy9xBAJPvJnp+POy49++/xPXOFbSTqFC1mTlXaQ0o9BS6/nYvF/05Yo=',
+      'base64'
+    )
+
+    try {
+      await binauth.verifyToken(token)
+      t.fail('expected token to be expired')
+    } catch (err) {
+      t.equal(err.statusCode, 401, 'unauthorized due to token expiry')
+      t.match(err.message, /token expired/, '"auth token expired" error message')
+    }
+  })
+
   t.test('rejects invalid tokens', async (t) => {
     const fixtures = [
       {

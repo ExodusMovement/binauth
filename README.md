@@ -130,6 +130,8 @@ Parameters:
 - `options`: `Object` (required)
   - `serverPublicKey`: `Buffer` (required) - The ED25519 public key of the server.
   - `serverPrivateKey`: `Buffer` (required) - The ED25519 private key of the server.
+  - `challengeTTL`: `Number` (optional) - The number of milliseconds before newly issued challenges will expire. Defaults to 1 hour.
+  - `tokenTTL`: `Number` (optional) - The number of milliseconds before newly minted authentication tokens will expire. Defaults to 1 day.
 
 Returns:
 - `binauth`: `Object`
