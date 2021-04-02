@@ -16,21 +16,19 @@ const genKeyPair = (entropy = crypto.randomBytes(32)) => sodium.genSignKeyPair(e
 // 2021-01-06T01:17:46.031Z
 Date.now = () => 1609895866031
 
-const BASE64_REGEX = /^[A-Za-z0-9+/=]+$/
-
 test('binauth service', (t) => {
   t.test('issues challenges and tokens', async (t) => {
     const keyPair = await genKeyPair()
 
     const challenge = await binauth.getChallenge({
-      publicKey: keyPair.publicKey.toString('hex'),
+      publicKey: keyPair.publicKey,
     })
 
-    t.match(challenge, BASE64_REGEX, 'returns base64 challenge')
+    t.true(Buffer.isBuffer(challenge), 'returns challenge buffer')
 
     {
       const opened = await sodium.signOpen({
-        signed: Buffer.from(challenge, 'base64'),
+        signed: challenge,
         publicKey: serverPublicKey,
       })
 
@@ -40,20 +38,20 @@ test('binauth service', (t) => {
     }
 
     const signedChallenge = await sodium.sign({
-      message: Buffer.from(challenge, 'base64'),
+      message: challenge,
       privateKey: keyPair.privateKey,
     })
 
     const token = await binauth.getToken({
-      signedChallenge: signedChallenge.toString('base64'),
-      publicKey: keyPair.publicKey.toString('hex'),
+      signedChallenge: signedChallenge,
+      publicKey: keyPair.publicKey,
     })
 
-    t.match(token, BASE64_REGEX, 'returns base64 token')
+    t.true(Buffer.isBuffer(token), 'returns auth token buffer')
 
     {
       const opened = await sodium.signOpen({
-        signed: Buffer.from(token, 'base64'),
+        signed: token,
         publicKey: serverPublicKey,
       })
 
@@ -68,13 +66,15 @@ test('binauth service', (t) => {
     // Type:       1 (challenge)
     // Public Key: 18a5b8403234f08fe0364198fb4475d138cce03717a428500e78be2b8fbe4a63
     // Time:       2021-01-06T01:17:46.000Z
-    const signedChallenge =
-      'rVvDDaX9NRVqCuxBOToWjujJbMS2b0He1caovgrFZVx7wbtroXoVnPCw0Xitbys/OsA7v1EuboEHU346c3/QAhwVOBzWGJJguGQQ3SDyvobhqMUBH+PCq8B+XANJFrkQvRlw/gEm/ep+4+/LiiqCkOLgg6y6D9uGm0gXTw5SfAkBGKW4QDI08I/gNkGY+0R10TjM4DcXpChQDni+K4++SmNf9Q+6'
-    const publicKey = '18a5b8403234f08fe0364198fb4475d138cce03717a428500e78be2b8fbe4a63'
+    const signedChallenge = Buffer.from(
+      'rVvDDaX9NRVqCuxBOToWjujJbMS2b0He1caovgrFZVx7wbtroXoVnPCw0Xitbys/OsA7v1EuboEHU346c3/QAhwVOBzWGJJguGQQ3SDyvobhqMUBH+PCq8B+XANJFrkQvRlw/gEm/ep+4+/LiiqCkOLgg6y6D9uGm0gXTw5SfAkBGKW4QDI08I/gNkGY+0R10TjM4DcXpChQDni+K4++SmNf9Q+6',
+      'base64'
+    )
+    const publicKey = Buffer.from('18a5b8403234f08fe0364198fb4475d138cce03717a428500e78be2b8fbe4a63', 'hex')
 
     const token = await binauth.getToken({ publicKey, signedChallenge })
     t.equal(
-      token,
+      token.toString('base64'),
       'BabWhb2/N3yMBFeKFTr020lQMTIxnXyNakLO2yXgTIW92vzJLrcDdtb9Uinr80LRUEtrhLzq5eOLOeuAmPSqAQIYpbhAMjTwj+A2QZj7RHXROMzgNxekKFAOeL4rj75KY1/1D7o=',
     )
   })
@@ -151,7 +151,8 @@ test('binauth service', (t) => {
     ]
 
     for (const fixture of fixtures) {
-      const { signedChallenge, publicKey } = fixture
+      const signedChallenge = Buffer.from(fixture.signedChallenge, 'base64')
+      const publicKey = Buffer.from(fixture.publicKey, 'hex')
       try {
         await binauth.getToken({ signedChallenge, publicKey })
         t.fail(`expected to throw error: ${fixture.error}`)
@@ -167,8 +168,10 @@ test('binauth service', (t) => {
       // Type:       2 (token)
       // Public Key: 4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc
       // Time:       2021-01-06T01:17:46.000Z
-      const token =
-        'qyBNFMMTsncEgn4k7l9xS01akcjH87MfrNTtevA9U975pfTWQ3WDEzDlae5+irOhoIkvfU0PgbMLjkodOr9MCgJPvJnp+POy49++/xPXOFbSTqFC1mTlXaQ0o9BS6/nYvF/1D7o='
+      const token = Buffer.from(
+        'qyBNFMMTsncEgn4k7l9xS01akcjH87MfrNTtevA9U975pfTWQ3WDEzDlae5+irOhoIkvfU0PgbMLjkodOr9MCgJPvJnp+POy49++/xPXOFbSTqFC1mTlXaQ0o9BS6/nYvF/1D7o=',
+        'base64'
+      )
 
       const publicKey = await binauth.verifyToken(token)
       t.same(publicKey, Buffer.from('4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc', 'hex'))
@@ -179,8 +182,10 @@ test('binauth service', (t) => {
       // Type:       2 (token)
       // Public Key: 4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc
       // Time:       2021-01-05T22:17:46.000Z
-      const token =
-        '4UkbxKggoctAvU8IJqxvDuVmFxbTSbPBcEq2RuxdV21tlaMLVgRPU5i5rRyi0/48oc3dOzJbV8nnfLcCRy9xBAJPvJnp+POy49++/xPXOFbSTqFC1mTlXaQ0o9BS6/nYvF/05Yo='
+      const token = Buffer.from(
+        '4UkbxKggoctAvU8IJqxvDuVmFxbTSbPBcEq2RuxdV21tlaMLVgRPU5i5rRyi0/48oc3dOzJbV8nnfLcCRy9xBAJPvJnp+POy49++/xPXOFbSTqFC1mTlXaQ0o9BS6/nYvF/05Yo=',
+        'base64'
+      )
 
       const publicKey = await binauth.verifyToken(token)
       t.same(publicKey, Buffer.from('4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc', 'hex'))
@@ -195,8 +200,8 @@ test('binauth service', (t) => {
         // Public Key: 4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc
         // Time:       2021-01-06T01:17:46.000Z
         token: await binauth.getChallenge({
-          publicKey: '4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc',
-        }),
+          publicKey: Buffer.from('4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc', 'hex'),
+        }).then((challenge) => challenge.toString('base64')),
         // 'emmedfnflNfNpO+CpZg9znC2xb0b+KLPAFvflirEVjryAvnBOToErx7wmkByTZV9VmDQIrMd+ywHAIWSE/j7AQFPvJnp+POy49++/xPXOFbSTqFC1mTlXaQ0o9BS6/nYvF/1D7o=',
         error: 'incorrect bintoken type',
       },
@@ -248,13 +253,51 @@ test('binauth service', (t) => {
     ]
 
     for (const fixture of fixtures) {
-      const { token } = fixture
+      const token = Buffer.from(fixture.token, 'base64')
       try {
         await binauth.verifyToken(token)
         t.fail(`expected to throw error: ${fixture.error}`)
       } catch (err) {
         t.match(err.message, new RegExp(fixture.error, 'i'), fixture.error)
       }
+    }
+  })
+
+  t.test('rejects invalid input types', async (t) => {
+    try {
+      await binauth.getChallenge({
+        publicKey: '4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc',
+      })
+      t.fail('expected to throw invalid public key')
+    } catch (err) {
+      t.match(err.message, /invalid public key/, 'expected to fail invalid public key input type')
+    }
+
+    try {
+      await binauth.getChallenge({
+        publicKey: Buffer.alloc(10),
+      })
+      t.fail('expected to throw invalid public key')
+    } catch (err) {
+      t.match(err.message, /invalid public key/, 'expected to fail invalid public key input length')
+    }
+
+    try {
+      await binauth.getToken({
+        signedChallenge:
+          'hSAlAeN/YagQTHuMxT8hj1qBZ9QVv1WMbTQx3+E1Lcw/8ntb+V5vowEeDy3PaS4hlPSfwfXS/cqFg+64zw3LB+4wq67HVFutLWEj8rW543ujmiZGNyMgf2aXVVCWy1t8xnJn1F0buvXXliN1y8cYk0FfyraZ8jfZclL3JfWqLQEBAF/1D7o=',
+        publicKey: Buffer.from('4fbc99e9f8f3b2e3dfbeff13d73856d24ea142d664e55da434a3d052ebf9d8bc', 'hex'),
+      })
+      t.fail('expected to throw invalid signedChallenge')
+    } catch (err) {
+      t.match(err.message, /invalid signed challenge/, 'expected to fail invalid signed challenge input type')
+    }
+
+    try {
+      await binauth.verifyToken('qdyV3cDnDqbVE7jk63s6k9nuGCRCFb9FUpyZGvyjAiGgKU46oJlBTXZ')
+      t.fail('expected to throw invalid auth token')
+    } catch (err) {
+      t.match(err.message, /invalid auth token/, 'expected to fail invalid auth token input type')
     }
   })
 })

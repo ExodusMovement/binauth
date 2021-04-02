@@ -1,6 +1,6 @@
 # Binauth
 
-The `@exodus/binauth` package provides a stateless authentication mechanism, allowing clients to authenticate themselves to the server as a given ed25519 public key.
+The `@exodus/binauth` package provides a stateless authentication mechanism, allowing clients to authenticate themselves to the server as a given ed25519 public key. Validation tokens and challenges are issued by signing binary data.
 
 The client must install and use `@exodus/sodium-crypto`, and the server must install both `@exodus/binauth` and `@exodus/sodium-crypto`.
 
@@ -41,14 +41,14 @@ const entropy = Buffer.from('995007b62f7b2519b1ff34337470db9e323e32ec7118fbe2835
 const { publicKey, privateKey } = await sodium.genSignKeyPair(entropy)
 ```
 
-3. The client sends its public key, serialized in hex format, to the server.
+3. The client sends its public key, to the server.
 
-4. The server issues a challenge on the client's public key. A challenge is a byte array, composed of a version byte specifying that it is a challenge, the client's public key, and a timestamp. The challenge is then signed by the server's private key, so that the server can later verify the challenge is authentic. All this is encapsulated within `binauth.getChallenge`, which returns the signed, base64-encoded challenge
+4. The server issues a challenge on the client's public key. A challenge is a byte array, composed of a version byte specifying that it is a challenge, the client's public key, and a timestamp. The challenge is then signed by the server's private key, so that the server can later verify the challenge is authentic, thereby allowing for statelessness. All this is encapsulated within `binauth.getChallenge`, which returns the signed challenge.
 
 ```js
 // Server
-const challenge = await binauth.getChallenge({ publicKey: publicKeyHex })
-console.log(challenge) // 'AcwBvnPeBHTRw...'
+const challenge = await binauth.getChallenge({ publicKey })
+console.log(challenge.toString('base64')) // 'AcwBvnPeBHTRw...'
 ```
 
 5. The server returns the challenge to the client.
@@ -59,20 +59,20 @@ console.log(challenge) // 'AcwBvnPeBHTRw...'
 // Client
 const signedChallenge = await sodium.sign({
   privateKey,
-  message: Buffer.from(challenge, 'base64'),
+  message: challenge,
 })
 ```
 
-7. The client sends the signed challenge, serialized in base64, and its public key, serialized in hex format, to the server.
+7. The client sends its public key and the signed challenge to the server.
 
 8. The server validates the signed challenge. Therein, a boatload of validation occurs:
   - The server verifies the signed challenge is signed by the public key given by the client.
-  - After unwrapping the client's signature, the server's signature is also verified.
+  - After unwrapping the client's signature, the server's own signature is also verified.
   - The public key from the initial challenge byte array is compared with the one given by the client - they must be equal.
   - The server validates that the initial challenge's version byte is correct.
   - The server validates that the initial challenge's timestamp is within the defined challenge time-to-live (TTL) of the current time, and is not in the future.
 
-If all validation steps succeed, the server signs and issues an authentication token, encoded in base64, which will authorize that client as having control of the given public key. The signed authentication token is the same format as a signed challenge returned by `binauth.getChallenge`, with a different version byte, the client's public key, and the current timestamp. All of the above is encapsulated within the method `binauth.getToken`.
+If all validation steps succeed, the server signs and issues an authentication token, which will authorize that client as having control of the given public key. The signed authentication token is the same binary format as a signed challenge returned by `binauth.getChallenge`, with a different version byte, the client's public key, and the current timestamp. All of the above is encapsulated within the method `binauth.getToken`.
 
 If validation fails, an error is thrown which may have a `.statusCode` property. `.statusCode` is provided if a planned validation step does not succeed, and the status code describes what class of failure occurred. Right now, it can either be `400` (BadRequest), `401` (Unauthorized), or `undefined`. If `.statusCode` is `undefined`, it should be considered an internal server error, and is probably a bug which should be reported.
 
@@ -83,6 +83,7 @@ try {
     publicKey: publicKeyHex,
     signedChallenge: signedChallengeB64,
   })
+  console.log(authToken.toString('base64')) // 'UntZvh3hKSPtY3...'
 } catch (err) {
   // BadRequest - client is trying to manipulate the server, forge signatures, etc
   if (err.statusCode === 400) throw err
@@ -95,7 +96,7 @@ try {
 }
 ```
 
-9. The server returns the authentication token to the client. The client is now 'authenticated', and can pass the authentication token as an HTTP request header, or as a URL query parameter, or in a request body, or in a websocket message, etc.
+9. The server returns the authentication token to the client. The client is now 'authenticated', and can pass the authentication token to the server as an HTTP request header, as a URL query parameter, in a request body, in a websocket message, etc.
 
 10. To verify the authentication token, the server calls `binauth.verifyToken(authToken)`. This validates that:
   - the signature on the token came from the server's private key.
