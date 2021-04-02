@@ -10,7 +10,7 @@
     "lib"
   ],
   "scripts": {
-    "lint": "jshint lib",
+    "lint": "jshint lib binauth.test.js",
     "test": "node binauth.test.js"
   },
   "repository": {
