@@ -30,7 +30,7 @@ test('binauth service', (t) => {
         publicKey: serverPublicKey,
       })
 
-      t.equal(opened[0], binauth.TYPE_CHALLENGE)
+      t.equal(opened[0], 1) // TYPE_CHALLENGE
       t.same(opened.slice(1, 33), keyPair.publicKey)
       t.equal(opened.slice(33, 37).readUInt32BE(), Math.floor(Date.now() / 1000))
     }
@@ -50,7 +50,7 @@ test('binauth service', (t) => {
         publicKey: serverPublicKey,
       })
 
-      t.equal(opened[0], binauth.TYPE_TOKEN)
+      t.equal(opened[0], 2) // TYPE_TOKEN
       t.same(opened.slice(1, 33), keyPair.publicKey)
       t.equal(opened.slice(33, 37).readUInt32BE(), Math.floor(Date.now() / 1000))
     }
