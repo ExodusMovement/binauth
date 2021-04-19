@@ -17,6 +17,41 @@ const genKeyPair = (entropy = crypto.randomBytes(32)) => sodium.genSignKeyPair(e
 Date.now = () => 1609895866031
 
 test('binauth service', (t) => {
+  t.test('fails on bad initialization parameters', (t) => {
+    t.throws(
+      () => createBinauth({ serverPublicKey }),
+      /must pass serverPrivateKey/,
+      'failing to pass serverPrivateKey'
+    )
+    t.throws(
+      () => createBinauth({ serverPrivateKey }),
+      /must pass serverPublicKey/,
+      'failing to pass serverPublicKey'
+    )
+    t.throws(
+      () => createBinauth({ serverPublicKey, serverPrivateKey, challengeTTL: null }),
+      /invalid challengeTTL/,
+      'invalid challengeTTL'
+    )
+    t.throws(
+      () => createBinauth({ serverPublicKey, serverPrivateKey, tokenTTL: 'foo' }),
+      /invalid tokenTTL/,
+      'invalid tokenTTL'
+    )
+    t.throws(
+      () => createBinauth({ serverPublicKey, serverPrivateKey, challengeTTL: -5000 }),
+      /invalid challengeTTL/,
+      'invalid challengeTTL'
+    )
+    t.throws(
+      () => createBinauth({ serverPublicKey, serverPrivateKey, tokenTTL: 0 }),
+      /invalid tokenTTL/,
+      'invalid tokenTTL'
+    )
+
+    t.end()
+  })
+
   t.test('issues challenges and tokens', async (t) => {
     const keyPair = await genKeyPair()
 
