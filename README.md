@@ -234,3 +234,11 @@ Tests an authentication token. If valid, returns the public key over which the h
 
 **Returns**:
 - `Promise<Buffer>` - The public key which the holder of the authentication token has control.
+
+## Deauthenticating users
+
+While presumably rare, in case if there is a need to deauthenticate a token (or challenge) before their expiration time, (e.g. if auth token was somehow leaked for a user without their private keys being leaked), the only way to do that is to deauthenticate all users, rotating the server private/public keypair.
+
+All valid users should seamlessly reautheticate via the corresponding client implementation.
+
+_Alternatively, a blocklist of tokens could be theoretically used prior to `getToken` / `verifyToken` calls, but that is not recommended, as both of those would need separate blocklists, and operating such a blocklist could be hard._
