@@ -174,7 +174,17 @@ Once compromised, a private key cannot be un-compromised. This means that the pu
 
 As such, clients should take pains to keep their private keys safe, commensurate with the privileges available to them once authenticated. You may also wish to consider implementing a 'self-destruct' feature available to the client in the event it believes the private key has been compromised. Self-destructing would amount to account deletion: purging any sensitive data that the authenticated client would have access to, and revocation of any abilities it once posessed.
 
-Compromised authentication tokens, however, are not nearly as dangerous. After expiring, they can no longer be used, but there is no way to revoke them in the interim (except for rotating the server key pair, which would invalidate _all_ tokens and challenges, everywhere, simultaneously). If your implementation carries exposure risk for authentication tokens, it is recommended to set a short `tokenTTL`.
+-------------
+
+**How should compromised authentication tokens be handled?**
+
+Compromised authentication tokens are not nearly as dangerous as compromised client keys, because they expire. After expiring, they can no longer be used, but in the meantime there is no way to selectively revoke them.
+
+If a client's auth token was somehow leaked without their private key being leaked, the only way to revoke it is to deauthenticate all users by rotating the server key pair. This would invalidate _all_ tokens and challenges, everywhere, simultaneously. Valid clients should seamlessly reautheticate via the corresponding client implementation.
+
+_Alternatively, blocklists of tokens could theoretically be imposed prior to `getToken` / `verifyToken` calls, but that is not recommended, as maintaining such blocklists could be challenging._
+
+If your implementation carries exposure risk for authentication tokens, it is recommended to set a short `tokenTTL` so that exposed tokens carry minimal risk.
 
 
 ## API Reference
