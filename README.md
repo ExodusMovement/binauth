@@ -6,6 +6,8 @@ The client must install and use `@exodus/sodium-crypto`, and the server must ins
 
 The protocol is described below. Code examples are included, specifying whether the code is running on a server or a client. Transmission of data between client and server could be done in any number of ways: HTTPS requests, websocket messages, etc. This is left as an exercise to the user of this library.
 
+**Data transmission should be done only via a secure channel**, this library does not attempt to provide MitM protection. That is delegated on the transport layer (i.e. TLS).
+
 1. The server generates its key pair, and sets up a `binauth` service object from that key pair. The server's keypair should remain consistent so that the authentication tokens given to clients remain valid. This can be done either by saving the entropy used to generate the keys, or by saving the keys themselves and loading them from environment variables. [Using a `.env` file](https://npmjs.com/package/dotenv) is a good way to achieve this without exposing the private key data in your source code.
 
 ```js
