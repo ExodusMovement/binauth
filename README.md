@@ -174,7 +174,17 @@ Once compromised, a private key cannot be un-compromised. This means that the pu
 
 As such, clients should take pains to keep their private keys safe, commensurate with the privileges available to them once authenticated. You may also wish to consider implementing a 'self-destruct' feature available to the client in the event it believes the private key has been compromised. Self-destructing would amount to account deletion: purging any sensitive data that the authenticated client would have access to, and revocation of any abilities it once posessed.
 
-Compromised authentication tokens, however, are not nearly as dangerous. After expiring, they can no longer be used, but there is no way to revoke them in the interim (except for rotating the server key pair, which would invalidate _all_ tokens and challenges, everywhere, simultaneously). If your implementation carries exposure risk for authentication tokens, it is recommended to set a short `tokenTTL`.
+-------------
+
+**How should compromised authentication tokens be handled?**
+
+Compromised authentication tokens are not nearly as dangerous as compromised client keys, because they expire. After expiring, they can no longer be used, but in the meantime there is no way to selectively revoke them.
+
+If a client's auth token was somehow leaked without their private key being leaked, the only way to revoke it is to deauthenticate all users by rotating the server key pair. This would invalidate _all_ tokens and challenges, everywhere, simultaneously. Valid clients should seamlessly reautheticate via the corresponding client implementation.
+
+_Alternatively, blocklists of tokens could theoretically be imposed prior to `getToken` / `verifyToken` calls, but that is not recommended, as maintaining such blocklists could be challenging._
+
+If your implementation carries exposure risk for authentication tokens, it is recommended to set a short `tokenTTL` so that exposed tokens carry minimal risk.
 
 
 ## API Reference
@@ -234,11 +244,3 @@ Tests an authentication token. If valid, returns the public key over which the h
 
 **Returns**:
 - `Promise<Buffer>` - The public key which the holder of the authentication token has control.
-
-## Deauthenticating users
-
-While presumably rare, in case if there is a need to deauthenticate a token (or challenge) before their expiration time, (e.g. if auth token was somehow leaked for a user without their private keys being leaked), the only way to do that is to deauthenticate all users, rotating the server private/public keypair.
-
-All valid users should seamlessly reautheticate via the corresponding client implementation.
-
-_Alternatively, a blocklist of tokens could be theoretically used prior to `getToken` / `verifyToken` calls, but that is not recommended, as both of those would need separate blocklists, and operating such a blocklist could be hard._
