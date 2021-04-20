@@ -284,3 +284,8 @@ Tests an authentication token. If valid, returns the public key over which the h
 
 **Returns**:
 - `Promise<Buffer>` - The public key which the holder of the authentication token has control.
+
+
+## Test Vectors
+
+For those wishing to reimplement this protocol in other languages or domains, check out the [test vectors](./test-vectors.json) file, and [see how the unit tests check the implementation against them](./binauth.test.js).
