@@ -128,7 +128,7 @@ If you plan to use this authentication protocol, **you should ensure that client
 - Reusing _server_ key pairs would mean that authentication tokens and challenges valid for one server are also valid for the other, and if one has a vulnerability, then they both do. This should be avoided as it provides zero benefit.
 - Reusing _client_ key pairs could result in escalation attacks, whereby control of one server can enable an attacker to impersonate the same clients on other servers.
 
-One could mitigate these risks by having the client verify the server's signatures on challenges and tokens before use. This would entail hard-coding a server public key - or arrays of acceptable public keys on a per-server basis - into the client to forestall MitM attacks and challenge-forgery.
+One could mitigate these risks with custom editions to the protocol, such as by having the client verify the server's signatures on challenges before signing them.
 
 However, a much more intuitive solution is to create new keys for every new server-client context, on both sides. This ensures that if auth tokens or keys are exposed for one context, or even if a server is taken over, it cannot affect the authentication context of others.
 
