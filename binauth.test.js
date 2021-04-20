@@ -48,6 +48,11 @@ test('binauth service', (t) => {
       /invalid tokenTTL/,
       'invalid tokenTTL'
     )
+    t.throws(
+      () => createBinauth({ serverId: 2, serverPublicKey, serverPrivateKey }),
+      /serverId must be a string/,
+      'invalid serverId'
+    )
 
     t.end()
   })
@@ -330,6 +335,35 @@ test('binauth service', (t) => {
       } catch (err) {
         t.match(err.message, new RegExp(fixture.error, 'i'), fixture.error)
       }
+    }
+  })
+
+  t.test('validates cross-server signature-reuse attacks by specifying serverId', async (t) => {
+    const binauth = createBinauth({ serverId: 'server1', serverPublicKey, serverPrivateKey })
+    const { publicKey, privateKey } = await genKeyPair()
+
+    const challenge = await binauth.getChallenge(publicKey)
+
+    // This imaginary client believes it is talking to server2, so it signs the challenge
+    // using 'server2' as the server ID. This prevents a takeover of server2 from
+    // impacting client keypairs which are reused on server1.
+    const signedChallenge = await sodium.sign({
+      privateKey,
+      message: Buffer.concat([
+        Buffer.from('server2'),
+        challenge,
+      ])
+    })
+
+    try {
+      await binauth.getToken(publicKey, signedChallenge)
+      t.fail('expected to throw invalid server ID')
+    } catch (err) {
+      t.match(
+        err.message,
+        /incorrect signature for the given public key/,
+        'expected signature validation to fail due to server ID mismatch'
+      )
     }
   })
 

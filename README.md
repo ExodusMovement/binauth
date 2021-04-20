@@ -123,14 +123,40 @@ try {
 
 **Data transmission between server & client should be done only via a secure channel.** This library does not attempt to provide MitM protection. That is delegated to the transport layer (i.e. TLS).
 
-If you plan to use this authentication protocol, **you should ensure that client and server key pairs are NOT reused** between different servers.
+---------
 
-- Reusing _server_ key pairs would mean that authentication tokens and challenges valid for one server are also valid for the other, and if one has a vulnerability, then they both do. This should be avoided as it provides zero benefit.
-- Reusing _client_ key pairs could result in escalation attacks, whereby control of one server can enable an attacker to impersonate the same clients on other servers.
+If you plan to use this authentication protocol on more than one server, each talking to common clients, then **you should ensure that client and server key pairs are NOT reused** between different server-client contexts.
 
-One could mitigate these risks with custom editions to the protocol, such as by having the client verify the server's signatures on challenges before signing them.
+Reusing _server_ key pairs would mean that authentication tokens and challenges valid for one server are also valid for the other, and if one has a vulnerability, then they both do. This should be avoided as it provides zero benefit.
 
-However, a much more intuitive solution is to create new keys for every new server-client context, on both sides. This ensures that if auth tokens or keys are exposed for one context, or even if a server is taken over, it cannot affect the authentication context of others.
+Reusing _client_ key pairs could result in escalation attacks, whereby control of one server can enable an attacker to impersonate common clients on other servers.
+
+For example, let's say _Server A_ and _Server B_ both talk to the same client, who uses the same public key pair for both servers. Let's imagine Server A is taken over by an attacker. The client authenticating with Server A will send up their public key to get a challenge. Server A could use that public key to fetch a challenge from Server B, and give that challenge to the client. The client would blindly sign it, and send the signed challenge to Server A. **The attacker controlling Server A can now use the signed challenge to generate an authentication token and thus impersonate the client on Server B.**
+
+The most natural solution is to create new key pairs for every new server-client context, on both sides. This ensures that if auth tokens or keys are exposed for one context, or even if a server is taken over, it cannot affect the authentication context of others.
+
+### Server ID
+
+However, if you cannot guarantee that key pairs will not be reused, there is another safety mechanism. You can pass `serverId` to the `createBinauth` function. This option **should be used if you plan to reuse client key pairs across multiple servers.** Each server must set a unique and consistent `serverId` when initializing `binauth`.
+
+Clients talking to that server _should_ prepend the appropriate `serverId` onto challenges prior to signing. This prevents signed challenges from being valid across different servers. Here is an example from a test case:
+
+```js
+const challenge = await binauth.getChallenge(publicKey)
+
+// This imaginary client believes it is talking to server123, so it signs the challenge
+// using 'server123' as the server ID. This prevents a takeover of server123 from
+// impacting client keypairs which are reused on some other server, e.g. 'server999'.
+const signedChallenge = await sodium.sign({
+  privateKey,
+  message: Buffer.concat([
+    Buffer.from('server123'),
+    challenge,
+  ])
+})
+```
+
+Even if the server specifies a `serverId`, the client can also choose to be server-agnostic, and just sign the challenge as-is. The server would still accept the signed challenge even without a prepended `serverId`. In this case, the client's public-key-identity would be vulnerable to the escalation attack described above.
 
 ## FAQ
 
@@ -210,6 +236,7 @@ Parameters:
 - `options`: `Object` (required)
   - `serverPublicKey`: `Buffer` (required) - The ED25519 public key of the server.
   - `serverPrivateKey`: `Buffer` (required) - The ED25519 private key of the server.
+  - `serverId`: `String` (optional) - A string identifying the server. See [Server ID instructions](#server-id).
   - `challengeTTL`: `Number` (optional) - The number of milliseconds before newly issued challenges will expire. Defaults to 1 hour. If passed, must be a positive integer.
   - `tokenTTL`: `Number` (optional) - The number of milliseconds before newly minted authentication tokens will expire. Defaults to 1 day. If passed, must be a positive integer.
 
