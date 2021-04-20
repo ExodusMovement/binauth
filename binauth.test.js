@@ -339,18 +339,18 @@ test('binauth service', (t) => {
   })
 
   t.test('validates cross-server signature-reuse attacks by specifying serverId', async (t) => {
-    const binauth = createBinauth({ serverId: 'server1', serverPublicKey, serverPrivateKey })
     const { publicKey, privateKey } = await genKeyPair()
 
+    const binauth = createBinauth({ serverId: 'Server B', serverPublicKey, serverPrivateKey })
     const challenge = await binauth.getChallenge(publicKey)
 
-    // This imaginary client believes it is talking to server2, so it signs the challenge
-    // using 'server2' as the server ID. This prevents a takeover of server2 from
-    // impacting client keypairs which are reused on server1.
+    // This imaginary client believes it is talking to Server A, so it signs the challenge
+    // using 'Server A' as the server ID. This prevents a takeover of Server A from
+    // impacting client keypairs which are reused on Server B.
     const signedChallenge = await sodium.sign({
       privateKey,
       message: Buffer.concat([
-        Buffer.from('server2'),
+        Buffer.from('Server A'),
         challenge,
       ])
     })

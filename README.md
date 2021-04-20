@@ -142,15 +142,17 @@ However, if you cannot guarantee that key pairs will not be reused, there is ano
 Clients talking to that server _should_ prepend the appropriate `serverId` onto challenges prior to signing. This prevents signed challenges from being valid across different servers. Here is an example from a test case:
 
 ```js
+// This is a challenge issued by Server B's keypair from the example attack vector above.
+const binauth = createBinauth({ serverId: 'Server B', serverPublicKey, serverPrivateKey })
 const challenge = await binauth.getChallenge(publicKey)
 
-// This imaginary client believes it is talking to server123, so it signs the challenge
-// using 'server123' as the server ID. This prevents a takeover of server123 from
-// impacting client keypairs which are reused on some other server, e.g. 'server999'.
+// This imaginary client believes it is talking to Server A, so it signs the challenge
+// using 'Server A' as the server ID. This prevents a takeover of Server A from
+// impacting client keypairs which are reused on Server B.
 const signedChallenge = await sodium.sign({
   privateKey,
   message: Buffer.concat([
-    Buffer.from('server123'),
+    Buffer.from('Server A'),
     challenge,
   ])
 })
