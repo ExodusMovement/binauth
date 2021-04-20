@@ -6,8 +6,6 @@ The client must install and use `@exodus/sodium-crypto`, and the server must ins
 
 The protocol is described below. Code examples are included, specifying whether the code is running on a server or a client. Transmission of data between client and server could be done in any number of ways: HTTPS requests, websocket messages, etc. This is left as an exercise to the user of this library.
 
-**Data transmission should be done only via a secure channel**, this library does not attempt to provide MitM protection. That is delegated on the transport layer (i.e. TLS).
-
 1. The server generates its key pair, and sets up a `binauth` service object from that key pair. The server's keypair should remain consistent so that the authentication tokens given to clients remain valid. This can be done either by saving the entropy used to generate the keys, or by saving the keys themselves and loading them from environment variables. [Using a `.env` file](https://npmjs.com/package/dotenv) is a good way to achieve this without exposing the private key data in your source code.
 
 ```js
@@ -120,6 +118,19 @@ try {
   throw err
 }
 ```
+
+## Security Considerations
+
+**Data transmission between server & client should be done only via a secure channel.** This library does not attempt to provide MitM protection. That is delegated to the transport layer (i.e. TLS).
+
+If you plan to use this authentication protocol, **you should ensure that client and server key pairs are NOT reused** between different servers.
+
+- Reusing _server_ key pairs would mean that authentication tokens and challenges valid for one server are also valid for the other, and if one has a vulnerability, then they both do. This should be avoided as it provides zero benefit.
+- Reusing _client_ key pairs could result in escalation attacks, whereby control of one server can enable an attacker to impersonate the same clients on other servers.
+
+One could mitigate these risks with custom editions to the protocol, such as by having the client verify the server's signatures on challenges before signing them.
+
+However, a much more intuitive solution is to create new keys for every new server-client context, on both sides. This ensures that if auth tokens or keys are exposed for one context, or even if a server is taken over, it cannot affect the authentication context of others.
 
 ## FAQ
 
