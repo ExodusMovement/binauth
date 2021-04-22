@@ -1,0 +1,178 @@
+{
+  "valid": [
+    {
+      "time": 65535,
+      "clientPrivateKey": "7b9a817105a6f5ea15eced989a72fa7514137e68c5a320e29baee4a5b14e86bb41964fac1a65701195379b232c0975c94a722701bc3d33a4336def5bd8b3d780",
+      "clientPublicKey": "41964fac1a65701195379b232c0975c94a722701bc3d33a4336def5bd8b3d780",
+      "serverPrivateKey": "20fd0e790bcb54c298fcf2f61f708848d3e93585ddc1dc7511850a869f882d3415828a582a9feb38dbf1da3090cae29ff73aa7950fce1cbf2a94ca19eb3861aa",
+      "serverPublicKey": "15828a582a9feb38dbf1da3090cae29ff73aa7950fce1cbf2a94ca19eb3861aa",
+      "challenge": "JbJpXv8Pa1WvJUguvuW70uPsQPm9dMLLCmxdHaP19+TRpmZtwWRKgXDG5YeQBRmmrpXrlsSbj4odD808rmZlBAFBlk+sGmVwEZU3myMsCXXJSnInAbw9M6Qzbe9b2LPXgAAAAEE=",
+      "signedChallenge": "o//jgqbwq/SXlJn0wEB+sVK7y1BCi/l/61riVcxdYhUVk/W7UFmS9KxfI/SCQs4h/kIDPLEtDOCEUKFq42UVACWyaV7/D2tVryVILr7lu9Lj7ED5vXTCywpsXR2j9ffk0aZmbcFkSoFwxuWHkAUZpq6V65bEm4+KHQ/NPK5mZQQBQZZPrBplcBGVN5sjLAl1yUpyJwG8PTOkM23vW9iz14AAAABB",
+      "token": "jO9UwO7USSZ8bKjmRu733n1u+NwGoJ3Gi/QcdQx9S2s+C/L2DezjGI+KG5HKZKPAWVeoBXxIU36VN83lgBIzDgJBlk+sGmVwEZU3myMsCXXJSnInAbw9M6Qzbe9b2LPXgAAAAEE="
+    },
+    {
+      "time": 1000,
+      "clientPrivateKey": "9350278551c3e160e4b2b26adbe8e37836501d6c64fe15fa95e59d6658b4106292d9c472ee068ccba0cf1bc3bb5f889dc4801bbaa355ef99b098b7adbd97653c",
+      "clientPublicKey": "92d9c472ee068ccba0cf1bc3bb5f889dc4801bbaa355ef99b098b7adbd97653c",
+      "serverPrivateKey": "d03b7a4a693fb33b6abec54a9de62e763744080aff1f6db4993ed90e8852d43ec74138dee8a6d49b5c791e6303b653204e72358e24097b4c54141ee37fd7efe6",
+      "serverPublicKey": "c74138dee8a6d49b5c791e6303b653204e72358e24097b4c54141ee37fd7efe6",
+      "challenge": "tO/YZ+hilWPmxKnllNO9eeltyYsrDvzObX4/Oc4JzFrX7saAC34E/1VwJTpAUIg0vsXgH76/1q0I9qfnU8VVCQGS2cRy7gaMy6DPG8O7X4idxIAbuqNV75mwmLetvZdlPAAAAAE=",
+      "signedChallenge": "BzINuAqXSZDOhHFJcWJAi7OQPeB7w3s7qwRFAbPHE20NCC7WYYeM5qjpDuwZ6zkQtB014r4zQUz3i6X84+bHAbTv2GfoYpVj5sSp5ZTTvXnpbcmLKw78zm1+PznOCcxa1+7GgAt+BP9VcCU6QFCINL7F4B++v9atCPan51PFVQkBktnEcu4GjMugzxvDu1+IncSAG7qjVe+ZsJi3rb2XZTwAAAAB",
+      "token": "t/8IDdDx2iuF/yF1nXMVAmEhYfvKf82YJ0YgHhTDP78FmlH+0q8qIvzI1FSEw3UutSQdHSgvNC3mDn89jDcaDAKS2cRy7gaMy6DPG8O7X4idxIAbuqNV75mwmLetvZdlPAAAAAE="
+    },
+    {
+      "time": 1618953444999,
+      "clientPrivateKey": "e3ae42d50361d2a3f58600554cf15c95e6e044324cb6c78ae1215ca83bfacab855a5766952ecbdd5c85cd51316635bae4dea15b3a76d0660db6a18d733cd805c",
+      "clientPublicKey": "55a5766952ecbdd5c85cd51316635bae4dea15b3a76d0660db6a18d733cd805c",
+      "serverPrivateKey": "b57e8ae7bac42b42d20575926a10cd17f1029645763c697b017917c8b7d12482cb81154304b5c3853b487efddc331267f4188cb3cf23fb7eef237f865420a422",
+      "serverPublicKey": "cb81154304b5c3853b487efddc331267f4188cb3cf23fb7eef237f865420a422",
+      "challenge": "VJ8WkcaOuM1CFobRCtbrI4aaVAXOkeNG0Cez/TYu9qLaeusvqCc3YKU17vjD6dXBLWE013Zjy3Qx31Xg7hkcAgFVpXZpUuy91chc1RMWY1uuTeoVs6dtBmDbahjXM82AXGB/ROQ=",
+      "signedChallenge": "F5t8lr88T0AUPA/LTCOptSyHmnykT0u1gncsy822vcdteMvwdX78arZkI2hvbzbSYoS442hSJKPjmupfEAyuCVSfFpHGjrjNQhaG0QrW6yOGmlQFzpHjRtAns/02Lvai2nrrL6gnN2ClNe74w+nVwS1hNNd2Y8t0Md9V4O4ZHAIBVaV2aVLsvdXIXNUTFmNbrk3qFbOnbQZg22oY1zPNgFxgf0Tk",
+      "token": "McpdvNutXHOx3aIl0kMwImvbnKZLnaG0uSC+qxFeLfW5E+Vuk57cOTtP2A8SX2EAKuyjH5C5DwGiqXMyFq1OCgJVpXZpUuy91chc1RMWY1uuTeoVs6dtBmDbahjXM82AXGB/ROQ="
+    },
+    {
+      "time": 767730677848,
+      "serverId": "server123",
+      "clientPrivateKey": "273ebac6bfd2feaa9479d25219b2499127bde240ba920ffbd1ad805ebb171a989b9d330adb33ee3886b879271d5ce4272e3384d1a02a13ae901f51f29bdbad22",
+      "clientPublicKey": "9b9d330adb33ee3886b879271d5ce4272e3384d1a02a13ae901f51f29bdbad22",
+      "serverPrivateKey": "38d6801ea2cab6a44a12e585b19d5670d82ef5b5c807f6b790e767345158710c2e76e140f9fbac64242c3b2f64fa46bfbf64a9b7133581075b9d523d12a86de9",
+      "serverPublicKey": "2e76e140f9fbac64242c3b2f64fa46bfbf64a9b7133581075b9d523d12a86de9",
+      "challenge": "uyV7IyiDhhPS44A9YJMDlQF6u1r1PXuwyMOAxIdPfsuWsiL2yxcE3b0iM95z7gNi0TUdfqjp2WmJGrxTnC0DBQGbnTMK2zPuOIa4eScdXOQnLjOE0aAqE66QH1Hym9utIi3Co/U=",
+      "signedChallenge": "Ty/Jqi7hXugeXw4e8Nk9fM7PLzeYG6RJfEj1tYJ867ytlEKimkKBu32ZitQrqp6kXqQrrJxFwKkCZJjOIjh4A3NlcnZlcjEyM7sleyMog4YT0uOAPWCTA5UBerta9T17sMjDgMSHT37LlrIi9ssXBN29IjPec+4DYtE1HX6o6dlpiRq8U5wtAwUBm50zCtsz7jiGuHknHVzkJy4zhNGgKhOukB9R8pvbrSItwqP1",
+      "token": "HUkElV5H4RKjupim4SRCAIpi1I0TS1hiORlgHuOmny2ZILCUfvshR1TzCwh8z+PHGRolkTUw6N3fTHxysHWUBAKbnTMK2zPuOIa4eScdXOQnLjOE0aAqE66QH1Hym9utIi3Co/U="
+    }
+  ],
+  "invalidSignedChallenges": [
+    {
+      "comment": "signed auth token instead of challenge",
+      "error": "incorrect bintoken type",
+      "time": 1618953477382,
+      "clientPublicKey": "783e9d0fd3e114e12166fd3d5ae4bd134b348e2de07ba5fcd60529232e31c26a",
+      "serverPrivateKey": "c61a6fca2b472309f4ee786d2a3da341ba23e81f08551d2e514d756ca570f2fb226192bc80d165d12f6bab8b545944c79b60dc6161ee507efcbbac921dbd15fd",
+      "serverPublicKey": "226192bc80d165d12f6bab8b545944c79b60dc6161ee507efcbbac921dbd15fd",
+      "signedChallenge": "kPdWZaXzGA/Y81QocF87nn/lLLOkeEdx1dzfRy2vK7LQG0I1VPii2MtGdmGn1Jye1liiIGcrwXKPIW+sDngzDtbtJjVe0TgOyvZCe3K9ZjCZvBpY3aa95d8fX6M/RzpXTNV7xZ+JoMy14xns+Zp9yKY1Bca/S3M9PdBYPPlPzgACeD6dD9PhFOEhZv09WuS9E0s0ji3ge6X81gUpIy4xwmpgf0UF"
+    },
+    {
+      "comment": "bare challenge given without signature",
+      "error": "incorrect signature for the given public key",
+      "time": 1618953477382,
+      "clientPublicKey": "255d33094b999c83b8c9011fe739473ba8f684785c941efd8fb518512a7a42c8",
+      "serverPrivateKey": "a8f792fbc5434d1c9b0c4fad7babea1a4f9b7567b7f18c6c1fbc5de6092ca7f9a3fc9e8ae1eb7cfd52721bd9afc097a01fc19dfa3bf0048f8cb00bc1daccbdde",
+      "serverPublicKey": "a3fc9e8ae1eb7cfd52721bd9afc097a01fc19dfa3bf0048f8cb00bc1daccbdde",
+      "signedChallenge": "7ZW1QrD8d40PUnWFp5+SKosOZKc+GXAyq4oj7TIX+3sLhXgojYLdG4MxJVovLngcHiACmCXp7HxJ6Z7mhg6OCgElXTMJS5mcg7jJAR/nOUc7qPaEeFyUHv2PtRhRKnpCyGB/RQU="
+    },
+    {
+      "comment": "empty buffer signed, instead of signed challenge",
+      "error": "signedMessage is too short",
+      "time": 1618953477382,
+      "clientPublicKey": "b47797b7dddeccb91f01fabd67a7a32fcbc0b5137f5fc9c460730371c3e037e0",
+      "serverPrivateKey": "36e7f869c9acd75c653a3217f27a97814848c0dbe6c13efc09b6a4e18c4a09d4258e2cdc062656c4906930cd177492e56284d4ef8454ed8ed0e47cf96e6281b7",
+      "serverPublicKey": "258e2cdc062656c4906930cd177492e56284d4ef8454ed8ed0e47cf96e6281b7",
+      "signedChallenge": "ngTYlmNrQXAqp7Z0ys/JnZqe2vSRMywOK6v3H8IAUuYvZ29KJg78zzM8A5wynL+1k0VSJMRsb/2BXremCNsoCA=="
+    },
+    {
+      "comment": "challenge issued on different public key than that which signed it",
+      "error": "incorrect public key",
+      "time": 918420260514,
+      "clientPublicKey": "dfce00427e7513d67af4e5ac7d306cb78ec82019cb6b6089d5f9c1d6317dbaf6",
+      "serverPrivateKey": "3f87d0bf5d0b53f07304a5bde50c593b3366a9b3f55ef4a63c86d36a0699d0033c931381230e1deb675a1ccc464bf1fb23dd8258c1592346aa0515f06374f24f",
+      "serverPublicKey": "3c931381230e1deb675a1ccc464bf1fb23dd8258c1592346aa0515f06374f24f",
+      "signedChallenge": "eNNdHKsv+OeADIitacAFe7l3fLUQnDy6yUq/gfIVrVMAQkTLT6HwOgviixSRXSor6sts1g5tKX8JBXTf7eJ7AWwfwtfifTrkS0pFoGuXnAEU7p/Ao9H9ge4/nVorH0mFjDDOG/qfqePB9hYR4jTMsZwZhrMu1StFhdgyNyE6zgcBI1NojU7M/cdZpoC2gMz4DIjjv8jKJUGP2uaUqMG6nwk2vfsk"
+    },
+    {
+      "comment": "garbage data appended to the challenge prior to signing",
+      "error": "incorrect signature for the given public key",
+      "time": 1560731019063,
+      "clientPublicKey": "382ff35785161ceb3cf026344073971a1dd4502e42090a419d7c5e1b3dfd355e",
+      "serverPrivateKey": "2edb58742b9c5cc3e754b31aadc9c187617370b709211999d343778f61fffad61235d9f662f1c2f08b434b097e14a6c8d0abaa638394539b1658b12e87cdd154",
+      "serverPublicKey": "1235d9f662f1c2f08b434b097e14a6c8d0abaa638394539b1658b12e87cdd154",
+      "signedChallenge": "6Lua8iO3zY+NYAwVXifCVDFjeGfGmJm/gXwv8YfBXyS0myH/dt+CtnFly+nfvEQcW3RknlvJKyFT5hwkVJKyAkuvuxzQZ+Wtq1ruREtBy7TesDT+VCLudXKa95I7GCV/+J4axRdG1T6AG1OXQ1uts7tQorS3P+l3m2uvvorV3AwBOC/zV4UWHOs88CY0QHOXGh3UUC5CCQpBnXxeGz39NV5dBt2JUoREkw=="
+    },
+    {
+      "comment": "challenge expired",
+      "error": "challenge expired",
+      "time": 439158399796,
+      "challengeTTL": 10000,
+      "clientPublicKey": "64cbe2eac1d32046fa8de103cdfa893c2b047f19329dfac4f9760cf7f4d439e2",
+      "serverPrivateKey": "a7724c0835a2ef5e67a0fc38e88a237d1d4a510c5f2695579c925fa6a41ebb93bc5e2de924fec760b58300d1a005b2fdaa8765771fa30fa8beb7dbdd1daf6d96",
+      "serverPublicKey": "bc5e2de924fec760b58300d1a005b2fdaa8765771fa30fa8beb7dbdd1daf6d96",
+      "signedChallenge": "YDGz10JetNyiGSTQ7ZK7M4PRmBjMShconmJU5dq7QAer5YZHs9+cM/J4rvhP971ytoqTJGZk/fNDDOOQe2LSBsv8REIFvGWxFAjrmeddh9/TLEBJ1kP9bEh25NMnsq4U4BBc4gXSjGmwjVHahSrHOgeWNdGlHKPh8/kjUjFvfgABZMvi6sHTIEb6jeEDzfqJPCsEfxkynfrE+XYM9/TUOeIaLQZ1"
+    },
+    {
+      "comment": "challenge timestamped in the future",
+      "error": "challenge timestamped in the future",
+      "time": 1618956189385,
+      "clientPublicKey": "18a5b8403234f08fe0364198fb4475d138cce03717a428500e78be2b8fbe4a63",
+      "serverPrivateKey": "bad6033bf868a9dc01b2dddfbb88251b8fdbd36fb6d9ae7e5931cbf3049dbb5ef189b0e4cc4d422d681545a2ce79eea824099ec550a058bcd965d6d560ed6574",
+      "serverPublicKey": "f189b0e4cc4d422d681545a2ce79eea824099ec550a058bcd965d6d560ed6574",
+      "signedChallenge": "6e8F9kU13h08KSrpQMcOFQIMOrsRaxnYeV3nL3byP8ozykZN6FvzCHWvAlgj4GoezlkejmuUiORPlxGqr3gGBeNH4ehbJWbhVbyHPnOk55u+Lyvu+WpIifS/t36dkpaEF0AsZ508BlPy+RFHyxA6UrhDJ0ARrCDrV03GO+sdowQBGKW4QDI08I/gNkGY+0R10TjM4DcXpChQDni+K4++SmP0hlcA"
+    },
+    {
+      "comment": "challenge signed with a serverId 'server123', but server unaware of the serverId",
+      "error": "incorrect signature for the given public key",
+      "time": 2169797947227,
+      "clientPublicKey": "b9c9b5c7020f32d1dfad1e1a813cf3d40a06b73040894539a68cf391322c4af4",
+      "serverPrivateKey": "e0c0e0a020bff0b98220ed13eb4f9862de3f3028cf2964ebbd1e0bc29072c4d260a5d6b2f21cb89d63dc0a427f226d363aff7fd39e81bb43c59417ba1b6804ac",
+      "serverPublicKey": "60a5d6b2f21cb89d63dc0a427f226d363aff7fd39e81bb43c59417ba1b6804ac",
+      "signedChallenge": "GwWRyfglw92sDeiRaI/2pyeLpXBuOGIeETxulxF5oxThvM6S6yZ0VGN1/dMdBg/miCQRev0Z7XTBjvUk3mS4CHNlcnZlcjEyMxwyo+Pebesf1b9zPXikWiOO+pQEuj5HGhsnSwQEt3QHBRJngAIaNKdDh0kH4Ur2HSwibw3MHYmVra5nyc1+WQEBucm1xwIPMtHfrR4agTzz1AoGtzBAiUU5pozzkTIsSvSBVH07"
+    },
+    {
+      "comment": "challenge signed with a serverId 'server123', but server has different serverId",
+      "error": "incorrect signature for the given public key",
+      "time": 2169797947227,
+      "serverId": "backend-server",
+      "clientPublicKey": "b9c9b5c7020f32d1dfad1e1a813cf3d40a06b73040894539a68cf391322c4af4",
+      "serverPrivateKey": "e0c0e0a020bff0b98220ed13eb4f9862de3f3028cf2964ebbd1e0bc29072c4d260a5d6b2f21cb89d63dc0a427f226d363aff7fd39e81bb43c59417ba1b6804ac",
+      "serverPublicKey": "60a5d6b2f21cb89d63dc0a427f226d363aff7fd39e81bb43c59417ba1b6804ac",
+      "signedChallenge": "GwWRyfglw92sDeiRaI/2pyeLpXBuOGIeETxulxF5oxThvM6S6yZ0VGN1/dMdBg/miCQRev0Z7XTBjvUk3mS4CHNlcnZlcjEyMxwyo+Pebesf1b9zPXikWiOO+pQEuj5HGhsnSwQEt3QHBRJngAIaNKdDh0kH4Ur2HSwibw3MHYmVra5nyc1+WQEBucm1xwIPMtHfrR4agTzz1AoGtzBAiUU5pozzkTIsSvSBVH07"
+    }
+  ],
+  "invalidTokens": [
+    {
+      "comment": "Attempting to use challenge as token",
+      "error": "incorrect bintoken type",
+      "time": 552289702426,
+      "clientPublicKey": "312b8be7028428d0de1f406b19ecce8430f4416e5b3393436e460a0553f867b0",
+      "serverPrivateKey": "b61bca00924c121db1e34258590f0244e808d99fa8a5a7459399effeb09055e5c55477a973ad1e0dfc07e2e8f12caa5740e3ba045ab1e6484cb717a1d07d13d1",
+      "serverPublicKey": "c55477a973ad1e0dfc07e2e8f12caa5740e3ba045ab1e6484cb717a1d07d13d1",
+      "token": "617opwQsNbdYFPQGwFQAfQPZNAtDD3brTETbuVhjCnwWZomE8tsXa7Ct7rB5xq1VKFCTnxTtHK1zXlOf/K95AgExK4vnAoQo0N4fQGsZ7M6EMPRBblszk0NuRgoFU/hnsCDrRaY="
+    },
+    {
+      "comment": "token signed by incorrect server key",
+      "error": "incorrect signature for the given public key",
+      "time": 2006825449791,
+      "clientPublicKey": "a716761a4b2419eae87b581b460e5ab0c45651418a4e6ac1a17f19384aece28d",
+      "serverPrivateKey": "af3353dc95cd4c42c5cf935f61d7bc1fedd8a92460472e20e1da8360ca3468b1cde9c4b3a80ad99ca0a1b687ecc74ba2c7a789d452c8e9af28f2e0b6c4915949",
+      "serverPublicKey": "cde9c4b3a80ad99ca0a1b687ecc74ba2c7a789d452c8e9af28f2e0b6c4915949",
+      "token": "5pB0BZ2GJKiZfJ+Rj1W2j9W6z+jhbly4129a07HFx7Z8yVAzbGkqIAfbWslS2q8025GaN8N5XdfjSlsf/4ykAwKnFnYaSyQZ6uh7WBtGDlqwxFZRQYpOasGhfxk4SuzijXeduek="
+    },
+    {
+      "comment": "using signed empty buffer of incorrect length as token",
+      "error": "invalid bintoken length",
+      "time": 6657044355,
+      "clientPublicKey": "2b0d190f1d95bd919956cc2289e8ec407806a47de3f26167968b76729c215f03",
+      "serverPrivateKey": "077c6404c54ad810d729d5b3033059e405f3f0bdb5d2bf353a7a0e0efa04354d2b0872c024c6ccce1e21088939eba565cc18f0b66d6063c6050e430b9f19a8c9",
+      "serverPublicKey": "2b0872c024c6ccce1e21088939eba565cc18f0b66d6063c6050e430b9f19a8c9",
+      "token": "O0aTjQKRs8qAYOhbt5yIKkZjFsRaPCggyGzrc2XKv0QnllombI5yMjGO6D2bYP2jzNf4pianmjIgSNo3CxnFBAAAAAAAAAAAAAA="
+    },
+    {
+      "comment": "attempting to use expired token",
+      "error": "auth token expired",
+      "time": 332775594862,
+      "tokenTTL": 172800000,
+      "clientPublicKey": "4311320fc6c8234239d51b4fe5c908e6c387fd4071ef2134e541cb59c5dfef28",
+      "serverPrivateKey": "1ee32c5f4e1344306d463a1bc2fd1da4084381a1904897b8527378161f9b922c0689f4c9f901a7332a980751c5c7b76355c4f882dd95cf63999f984a8fe19e26",
+      "serverPublicKey": "0689f4c9f901a7332a980751c5c7b76355c4f882dd95cf63999f984a8fe19e26",
+      "token": "R6rnclt5zWKEQAunYZUv0Xa4EbIjGQxl1k2qqlCdtHzwwBkHVA79UpGiuZgFjCGgLjjUEJ5aE4oyFWbS+0SDCQJDETIPxsgjQjnVG0/lyQjmw4f9QHHvITTlQctZxd/vKBPTHao="
+    },
+    {
+      "comment": "token timestamped in the future",
+      "error": "auth token timestamped in the future",
+      "time": 2008552770367,
+      "clientPublicKey": "7fe081c7da80f1343c66629b3a00b85d9242a77b04b3f20ea1a60275eb8c9bc5",
+      "serverPrivateKey": "b693b12aeef924ff133af2438da8df6bcad02cc644d2d41c7468891739e45fe64b09c06af02acfe8f8984ac492df0907424c1e85df5a7066939bd7ed61c29658",
+      "serverPublicKey": "4b09c06af02acfe8f8984ac492df0907424c1e85df5a7066939bd7ed61c29658",
+      "token": "27NL+sMaBtz5VTDfFLsm3hRhtf6gKZjlRTznx3sPy2n8c6+Qgcwsc0EmXV37dEo6HBHDouWb57RwOubpHg7vDQJ/4IHH2oDxNDxmYps6ALhdkkKnewSz8g6hpgJ164ybxXe4FUk="
+    }
+  ]
+}
