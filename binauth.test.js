@@ -328,7 +328,6 @@ test('official test vectors', (t) => {
       Date.now = () => testVector.time
       const serverPrivateKey = Buffer.from(testVector.serverPrivateKey, 'hex')
       const serverPublicKey = Buffer.from(testVector.serverPublicKey, 'hex')
-      const clientPublicKey = Buffer.from(testVector.clientPublicKey, 'hex')
       const token = Buffer.from(testVector.token, 'base64')
 
       const { tokenTTL, serverId } = testVector
