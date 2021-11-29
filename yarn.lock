@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@exodus/bintoken@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@exodus/bintoken/-/bintoken-0.1.1.tgz#f521a6fa673d6f714ed506ee198213fc0c3a2e7a"
+  integrity sha512-+Hf362hPI2ksQYN3pKjv0nFv1kzw/EnTbdZGOkhhzvb5k+Wy9wTbcsHT3W1LbiVKpIitBKIWftgZHWqCoz6OUQ==
+
 "@exodus/libsodium-wrappers@1.0.8":
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/@exodus/libsodium-wrappers/-/libsodium-wrappers-1.0.8.tgz#9f4dd38ab626ef00b321165080275cbbf67fa73d"
