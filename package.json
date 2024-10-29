@@ -37,6 +37,6 @@
   },
   "dependencies": {
     "@exodus/bintoken": "^0.1.1",
-    "@exodus/sodium-crypto": "^3.1.0"
+    "@exodus/crypto": "^1.0.0-rc.18"
   }
 }

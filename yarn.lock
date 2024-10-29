@@ -7,24 +7,29 @@
   resolved "https://registry.yarnpkg.com/@exodus/bintoken/-/bintoken-0.1.1.tgz#f521a6fa673d6f714ed506ee198213fc0c3a2e7a"
   integrity sha512-+Hf362hPI2ksQYN3pKjv0nFv1kzw/EnTbdZGOkhhzvb5k+Wy9wTbcsHT3W1LbiVKpIitBKIWftgZHWqCoz6OUQ==
 
-"@exodus/libsodium-wrappers@1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@exodus/libsodium-wrappers/-/libsodium-wrappers-1.0.8.tgz#9f4dd38ab626ef00b321165080275cbbf67fa73d"
-  integrity sha512-ItRhzkLw0q0Zg8Qn4DkqGr366tlSJbaJbYmB2J1w9xgXimR+k1DsHDMaUKPKH3qQ7Pu7lvkYZnRp1mI6DLlNtA==
+"@exodus/crypto@^1.0.0-rc.18":
+  version "1.0.0-rc.18"
+  resolved "https://registry.yarnpkg.com/@exodus/crypto/-/crypto-1.0.0-rc.18.tgz#9ed08c1c91bca7f566fd338ae0d6d851d528b608"
+  integrity sha512-9s8GvdSZLiDFY9ZuxKlkYBeY571bIw3y5sUDh4Vzd7l22dvVWRNEechoy4hXB7/amqhLII3RSSg1QDrsmJ5t9Q==
   dependencies:
-    "@exodus/react-native-crypto-shim" "^1.0.0"
+    "@noble/ed25519" "^1.7.3"
+    "@noble/hashes" "^1.3.3"
+    "@noble/secp256k1" "^1.7.1"
 
-"@exodus/react-native-crypto-shim@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@exodus/react-native-crypto-shim/-/react-native-crypto-shim-1.0.0.tgz#092d89d61eeae626cb6ec59bbe9738762266ca7a"
-  integrity sha512-M8H7RdZdUErAVg9Ho/kn0xFaviGRjHubUW3S2Y0YNg0/nQTu8cuSWzEOzDlwRR6y1QeN+vXsRNV0ripL/EyMBA==
+"@noble/ed25519@^1.7.3":
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/@noble/ed25519/-/ed25519-1.7.3.tgz#57e1677bf6885354b466c38e2b620c62f45a7123"
+  integrity sha512-iR8GBkDt0Q3GyaVcIu7mSsVIqnFbkbRzGLWlvhwunacoLwt4J3swfKhfaM6rN6WY+TBGoYT1GtT1mIh2/jGbRQ==
 
-"@exodus/sodium-crypto@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@exodus/sodium-crypto/-/sodium-crypto-3.1.0.tgz#fa2ad784cdd478da49a17b190c1c284294247e84"
-  integrity sha512-v9PviBz52LlA3uoMMcDqKtAGWSCKz5JGERe4Ls4ZOoLX/tottCvcwLRMTKSuZeX0VB78O6w+qeUW6vqK2BchrA==
-  dependencies:
-    "@exodus/libsodium-wrappers" "1.0.8"
+"@noble/hashes@^1.3.3":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.5.0.tgz#abadc5ca20332db2b1b2aa3e496e9af1213570b0"
+  integrity sha512-1j6kQFb7QRru7eKN3ZDvRcP13rugwdxZqCjbiAVZfIJwgj2A65UmT4TgARXGlXgnRkORLTDTrO19ZErt7+QXgA==
+
+"@noble/secp256k1@^1.7.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@noble/secp256k1/-/secp256k1-1.7.1.tgz#b251c70f824ce3ca7f8dc3df08d58f005cc0507c"
+  integrity sha512-hOUk6AyBFmqVrv7k5WAw/LpszxVbj9gGN4JRkIX52fdFAj1UA61KXmZDvqVEm+pOyec3+fIeZB02LYa/pWOArw==
 
 array-filter@^1.0.0:
   version "1.0.0"
