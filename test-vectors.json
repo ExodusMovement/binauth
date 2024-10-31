@@ -63,7 +63,7 @@
     },
     {
       "comment": "empty buffer signed, instead of signed challenge",
-      "error": "signedMessage is too short",
+      "error": "Expected an Uint8Array of size 64",
       "time": 1618953477382,
       "clientPublicKey": "b47797b7dddeccb91f01fabd67a7a32fcbc0b5137f5fc9c460730371c3e037e0",
       "serverPrivateKey": "36e7f869c9acd75c653a3217f27a97814848c0dbe6c13efc09b6a4e18c4a09d4258e2cdc062656c4906930cd177492e56284d4ef8454ed8ed0e47cf96e6281b7",

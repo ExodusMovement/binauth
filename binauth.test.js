@@ -1,4 +1,4 @@
-const sodium = require('@exodus/sodium-crypto')
+const sodium = require('@exodus/crypto/sodium')
 const crypto = require('crypto')
 const testVectors = require('./test-vectors')
 const createBinauth = require('.')
